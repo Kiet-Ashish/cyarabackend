@@ -12,7 +12,8 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Use a lightweight JDK image to run the app
-FROM adoptium:17-jre-hotspot
+FROM adoptium/openjdk17:latest
+
 
 # Install required libraries for AWT/Swing (if necessary)
 RUN apt-get update && apt-get install -y \
