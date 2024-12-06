@@ -12,12 +12,16 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Use a lightweight JDK image to run the app
-FROM adoptopenjdk:17-jre-hotspot
+FROM adoptium:17-jre-hotspot
 
+# Install required libraries for AWT/Swing (if necessary)
 RUN apt-get update && apt-get install -y \
     libx11-dev libxext-dev libxrender-dev libxtst-dev libxi-dev \
     fonts-dejavu fonts-liberation fontconfig \
     && rm -rf /var/lib/apt/lists/*
+
+# Set headless mode (optional)
+ENV JAVA_OPTS="-Djava.awt.headless=true"
 
 # Set the working directory
 WORKDIR /app
