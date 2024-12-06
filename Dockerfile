@@ -12,7 +12,12 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Use a lightweight JDK image to run the app
-FROM adoptopenjdk:11-jre-hotspot
+FROM adoptopenjdk:17-jre-hotspot
+
+RUN apt-get update && apt-get install -y \
+    libx11-dev libxext-dev libxrender-dev libxtst-dev libxi-dev \
+    fonts-dejavu fonts-liberation fontconfig \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
 WORKDIR /app
