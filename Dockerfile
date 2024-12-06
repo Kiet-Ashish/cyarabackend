@@ -12,10 +12,9 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Use a lightweight JDK image to run the app
-FROM adoptium/openjdk17:latest
+FROM openjdk:17-jdk-slim
 
-
-# Install required libraries for AWT/Swing (if necessary)
+# Install required libraries for AWT/Swing
 RUN apt-get update && apt-get install -y \
     libx11-dev libxext-dev libxrender-dev libxtst-dev libxi-dev \
     fonts-dejavu fonts-liberation fontconfig \
