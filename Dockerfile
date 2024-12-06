@@ -12,7 +12,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Use a lightweight JDK image to run the app
-FROM openjdk:17-jdk-slim
+FROM adoptopenjdk:11-jre-hotspot
 
 # Set the working directory
 WORKDIR /app
